@@ -5,8 +5,9 @@ import "./App.css";
 
 const App = () => {
   const [data, setData] = useState([]);
-  const [regular, setRegular] = useState(false);
-  const [small, setSmall] = useState(false);
+  const [regular, setRegular] = useState(true);
+  const [small, setSmall] = useState(true);
+  const [packages, setPackages] = useState([]);
 
   const API = "https://front-end-test-bvhzjr6b6a-uc.a.run.app";
 
@@ -28,40 +29,56 @@ const App = () => {
     }
     setSmall(false);
   };
-  useEffect(() => {
-    showPackages();
-  }, [regular, small]);
 
   useEffect(() => {
     fetchAPI().then(data => setData(data));
   }, []);
 
-  const showPackages = () => {
+  useEffect(() => {
+    // setPackages([]);
     const chosenPackages = [];
     data.forEach(item => {
-      if (regular === true) {
+      if (small === false && regular === true) {
         if (item.tampons[0].size === "regular") {
           chosenPackages.push(item);
         }
-      } else if (small === true) {
+      } else if (small === true && regular === false) {
         if (item.tampons[0].size === "small") {
           chosenPackages.push(item);
         }
-      } else {
-        if (small === true && regular === true) {
-          chosenPackages.push(item);
-        }
+      } else if (small === true && regular === true) {
+        chosenPackages.push(item);
       }
     });
-    return chosenPackages;
-  };
+    return setPackages(chosenPackages);
+  }, [regular, small, data]);
+
+  // const showPackages = () => {
+  //   const chosenPackages = [];
+  //   data.forEach(item => {
+  //     if (regular === true) {
+  //       if (item.tampons[0].size === "regular") {
+  //         chosenPackages.push(item);
+  //       }
+  //     } else if (small === true) {
+  //       if (item.tampons[0].size === "small") {
+  //         chosenPackages.push(item);
+  //       }
+  //     } else {
+  //       if (small === true && regular === true) {
+  //         chosenPackages.push(item);
+  //       }
+  //     }
+  //   });
+  //   return setPackages(chosenPackages);
+  // };
 
   return (
     <Container>
       <Header as="h1">Products</Header>
-      <Checkbox slider label="Regular" onChange={handleRegular} />
-      <Checkbox toggle label="Small" onChange={handleSmall} />
-      <Product data={showPackages()} />
+      <Checkbox label="Regular" checked={regular} onChange={handleRegular} />
+      <Checkbox label="Small" checked={small} onChange={handleSmall} />
+      <Product data={packages} />
     </Container>
   );
 };
