@@ -60,9 +60,7 @@ const App = () => {
     <Container>
       <Header as="h1">Products</Header>
       <Checkbox slider label="Regular" onChange={handleRegular} />
-
       <Checkbox toggle label="Small" onChange={handleSmall} />
-
       <Product data={showPackages()} />
     </Container>
   );
