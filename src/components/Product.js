@@ -2,15 +2,15 @@ import React from "react";
 
 const Product = ({ data }) => {
   return (
-    <div className="card-parent">
-      <ul>
-        {data.map(item => {
-          return (
+    <div className="prod">
+      {data.map(item => {
+        return (
+          <div className="parent-card">
             <li>
               <div className="card" key={item.price}>
                 <img src={item.productImage} alt="alt" />
 
-                <h3>Price: {item.price} GPB</h3>
+                <h3>Package Price: {item.price} GPB</h3>
                 <h3>Package content :</h3>
                 <ul>
                   <li>Size: {item.tampons[0].size}</li>
@@ -25,9 +25,9 @@ const Product = ({ data }) => {
                 </ul>
               </div>
             </li>
-          );
-        })}
-      </ul>
+          </div>
+        );
+      })}
     </div>
   );
 };

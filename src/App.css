@@ -12,13 +12,28 @@ img {
   width: 500px;
 }
 
-.card-parent {
+label {
+  color: #ebe8d1;
+}
+
+ul,
+li {
+  list-style: none;
+  list-style-type: none;
+  color: #ebe8d1;
+}
+
+h1 {
+  color: #9fc29a;
+}
+
+.prod {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
-.card-parent > * {
+.prod > * {
   flex: 1;
   flex-basis: 500px;
   position: relative;
