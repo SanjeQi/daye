@@ -35,7 +35,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // setPackages([]);
     const chosenPackages = [];
     data.forEach(item => {
       if (small === false && regular === true) {
@@ -48,6 +47,8 @@ const App = () => {
         }
       } else if (small === true && regular === true) {
         chosenPackages.push(item);
+      } else {
+        return null;
       }
     });
     return setPackages(chosenPackages);
